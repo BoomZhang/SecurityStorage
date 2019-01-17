@@ -18,12 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        int num = add(3,4);
+        String ss = String.valueOf(num * 10 + getInt());
+        tv.setText(ss);
     }
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
-    public native String stringFromJNI();
+    //public native int stringFromJNI(int a,int b);
+    public static native int getInt();
+    public static native int add(int a,int b);
+
+
 }
