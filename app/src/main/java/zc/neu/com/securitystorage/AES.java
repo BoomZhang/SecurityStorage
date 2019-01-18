@@ -1,17 +1,15 @@
 package zc.neu.com.securitystorage;
 
-public class AES {
-  //
-  //static{
-  //  System.loadLibrary("native-lib");
-  //}
+import android.util.Base64;
 
-  public static void main(String[] arg){
-    int sum = add(10,10);
-    System.out.println(sum);
-  }
+/**
+ * 封装AES加解密相关的操作
+ */
+public class AES {
 
   public static String encryption(String plainText, String key){
+    //Base64.decode();
+    //Base64.encodeToString()
     return null;
   }
 
@@ -19,8 +17,7 @@ public class AES {
     return null;
   }
 
-  //private static native String AesEncryptC(String plainText, String key);
-  //private static native String AesDecryptC(String cipherText, String key);
-  private static native int add(int a,int b);
+  private static native String AesEncryptC(String plainText, String key);
+  private static native String AesDecryptC(String cipherText, String key);
 
 }
