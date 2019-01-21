@@ -393,17 +393,43 @@ bitset<128> mergeByte(byte in[16])
  * key_: 秘钥
  * return: 密文
  */
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_zc_neu_com_securitystorage_AES_AesEncryptC(JNIEnv *env, jclass type, jstring plainText_,
-                                                jstring key_) {
-    //const char *plainText = env->GetStringUTFChars(plainText_, 0);
-    //const char *key = env->GetStringUTFChars(key_, 0);
 
-    string plainText = env->GetStringUTFChars(plainText_, 0);
-    string key = env->GetStringUTFChars(plainText_, 0);
-    return env->NewStringUTF(key);
+extern "C"
+JNIEXPORT jbyteArray JNICALL
+Java_zc_neu_com_securitystorage_AES_AesEncryptC(JNIEnv *env, jclass type, jbyteArray plainText_,
+                                                jbyteArray key_) {
+    jbyte *plainText = env->GetByteArrayElements(plainText_, NULL);
+    jbyte *key = env->GetByteArrayElements(key_, NULL);
+    jbyteArray c_result = env->NewByteArray(16);
+    jbyte buf[16];
+
+    byte plain[16];
+    byte kk[16];
+    for(int i = 0; i < 16; i++){
+        plain[i] = plainText[i];
+        kk[i] = key[i];
+    }
+
+    word w[4 * (Nr + 1)];
+    KeyExpansion(kk, w);
+    encrypt(plain,w);
+
+    unsigned char* ch = (unsigned char*) plain;
+
+    for(int i=0; i<16; i++){
+        buf[i] = *(ch + sizeof(unsigned char) * i);
+    }
+
+    // TODO
+
+    env->ReleaseByteArrayElements(plainText_, plainText, 0);
+    env->ReleaseByteArrayElements(key_, key, 0);
+
+    env->SetByteArrayRegion(c_result, 0, 16, buf);
+    return c_result;
+
 }
+
 /**
  * AES的解密方法
  * cipherText_: 密文
@@ -411,18 +437,33 @@ Java_zc_neu_com_securitystorage_AES_AesEncryptC(JNIEnv *env, jclass type, jstrin
  * return: 明文
  */
 extern "C"
-JNIEXPORT jstring JNICALL
-Java_zc_neu_com_securitystorage_AES_AesDecryptC(JNIEnv *env, jclass type, jstring cipherText_,
-                                                jstring key_) {
-    const char *cipherText = env->GetStringUTFChars(cipherText_, 0);
-    const char *key = env->GetStringUTFChars(key_, 0);
+JNIEXPORT jbyteArray JNICALL
+Java_zc_neu_com_securitystorage_AES_AesDecryptC(JNIEnv *env, jclass type, jbyteArray cipherText_,
+                                                jbyteArray key_) {
+    jbyte *cipherText = env->GetByteArrayElements(cipherText_, NULL);
+    jbyte *key = env->GetByteArrayElements(key_, NULL);
+    jbyteArray c_result = env->NewByteArray(16);
+    jbyte buf[16];
+    byte cipher[16];
+    byte kk[16];
+    for(int i = 0; i < 16; i++){
+        cipher[i] = cipherText[i];
+        kk[i] = key[i];
+    }
 
-    // TODO
+    word w[4 * (Nr + 1)];
+    KeyExpansion(kk, w);
+    decrypt(cipher,w);
 
-    env->ReleaseStringUTFChars(cipherText_, cipherText);
-    env->ReleaseStringUTFChars(key_, key);
+    unsigned char* ch = (unsigned char*) cipher;
 
+    for(int i=0; i<16; i++){
+        buf[i] = *(ch + sizeof(unsigned char) * i);
+    }
 
-    return env->NewStringUTF(key);
+    env->ReleaseByteArrayElements(cipherText_, cipherText, 0);
+    env->ReleaseByteArrayElements(key_, key, 0);
+    env->SetByteArrayRegion(c_result, 0, 16, buf);
+    return c_result;
 
 }
