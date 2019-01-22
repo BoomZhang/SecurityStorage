@@ -49,11 +49,10 @@ public class RSA {
   /**
    * 设置加密时的参数
    * @param modulus
-   * @param privateKey
+   * @param publicKey
    */
-  public void setEncrypParams(BigInteger modulus,BigInteger privateKey){
+  public void setEncrypParams(BigInteger modulus,BigInteger publicKey){
     this.modulus = modulus;
-    this.privateKey = privateKey;
     this.publicKey = publicKey;
   }
 
