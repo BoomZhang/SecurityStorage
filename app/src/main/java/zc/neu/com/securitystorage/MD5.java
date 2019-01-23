@@ -20,6 +20,13 @@ public class MD5 {
     return md5;
   }
 
+  /**
+   * 将message进行报文摘要 "US-ASCII" "MD5"
+   * @param message
+   * @return  MD5结果，为length=16的byte数组
+   * @throws UnsupportedEncodingException
+   * @throws NoSuchAlgorithmException
+   */
   public static byte[] digest(String message)
       throws UnsupportedEncodingException, NoSuchAlgorithmException {
     return getInstance().digest(message.getBytes("US-ASCII"));
