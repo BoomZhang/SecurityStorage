@@ -6,6 +6,7 @@ public class KeyFactory{
 
   /**
    * 生成AES加密所用的字符串，8个字符，US-ASCII 编码
+   * ASCII值在33—126之间的，便于可视化查看
    * @return
    */
   public static String creatAesKey(){
