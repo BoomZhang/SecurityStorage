@@ -4,6 +4,7 @@ package zc.neu.com.securitystorage;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * 封装AES加解密相关的操作
@@ -13,7 +14,7 @@ import java.util.Map;
 public class AES {
 
   public static void main(String[] arg){
-
+    ArrayBlockingQueue<Integer> arrayBlockingQueue = new ArrayBlockingQueue<Integer>(100,true);
   }
 
   /**

@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+/**
+ * main界面
+ */
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
@@ -17,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText("zhangchao");
-
     }
-
 
 }
