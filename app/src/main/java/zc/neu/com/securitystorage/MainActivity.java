@@ -2,6 +2,7 @@ package zc.neu.com.securitystorage;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -14,12 +15,13 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("native-lib");
     }
 
+    private static String TAG = "Main";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText("zhangchao");
+        //this.getSupportActionBar().setTitle("zhangchao");
     }
 
 }
