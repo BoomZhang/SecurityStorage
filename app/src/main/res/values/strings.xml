@@ -1,6 +1,9 @@
 <resources>
-  <string name="app_name">SecurityStorage</string>
+  <string name="app_name">SS文件</string>
   <string name="file">文件</string>
   <string name="image">图片</string>
   <string name="setting">设置</string>
+  <string name="create_file">新建文本</string>
+  <string name="save">保存</string>
+  <string name="modify">修改</string>
 </resources>

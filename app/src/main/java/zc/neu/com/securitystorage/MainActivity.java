@@ -18,10 +18,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   static {
     System.loadLibrary("native-lib");
   }
+  //判断Fragment的类型
+  public static final int FILE = 0;//文本
+  public static final int IMAGE = 1;//图片
+  public static final int SETTING = 2;//设置
 
-  public static final int FILE = 0;
-  public static final int IMAGE = 1;
-  public static final int SETTING = 2;
+  //新建文本或者查看文本
+  public static final int CREAT = 0;//新建
+  public static final int READ = 1;//查看
+  public static final String TYPE = "type";
 
   private static String TAG = "Main";
   private ViewPager mViewPager;

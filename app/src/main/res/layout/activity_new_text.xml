@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="18dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+      android:id="@+id/activity_new_text_data_tv"
+      android:textSize="13dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="2019年1月24日"/>
+
+    <TextView
+      android:id="@+id/activity_new_text_time_tv"
+      android:textSize="13dp"
+      android:paddingLeft="14dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="18:43  |"/>
+
+    <TextView
+      android:id="@+id/activity_new_text_sum_tv"
+      android:textSize="13dp"
+      android:paddingLeft="13dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="0字"/>
+
+  </LinearLayout>
+
+  <View
+    android:background="#0984F9"
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"/>
+  
+  <EditText
+    android:id="@+id/activity_new_text_input_et"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="left|top"
+    android:hint="请输入..."
+    android:inputType="textMultiLine"
+    android:textSize="20dp"
+    android:background="@null"/>
+
+  <Button
+    android:id="@+id/activity_new_text_save_bt"
+    android:text="@string/save"
+    android:textSize="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -3,7 +3,7 @@ package zc.neu.com.securitystorage;
 /**
  * 创建时间：2019/2/20
  * 作者：zhangchao
- * 描述：图片信息实例
+ * 描述：图片信息类
  */
 public class ImageBean {
 
