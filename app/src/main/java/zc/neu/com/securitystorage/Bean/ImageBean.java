@@ -1,4 +1,4 @@
-package zc.neu.com.securitystorage;
+package zc.neu.com.securitystorage.Bean;
 
 /**
  * 创建时间：2019/2/20

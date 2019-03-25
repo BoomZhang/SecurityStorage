@@ -1,4 +1,4 @@
-package zc.neu.com.securitystorage;
+package zc.neu.com.securitystorage.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import zc.neu.com.securitystorage.Activity.MainActivity;
+import zc.neu.com.securitystorage.R;
+import zc.neu.com.securitystorage.Util.DateUtil;
 
 /**
  * 创建时间：2019/2/22

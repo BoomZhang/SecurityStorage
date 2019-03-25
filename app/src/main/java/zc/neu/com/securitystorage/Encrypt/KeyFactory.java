@@ -1,4 +1,4 @@
-package zc.neu.com.securitystorage;
+package zc.neu.com.securitystorage.Encrypt;
 
 import java.util.Random;
 

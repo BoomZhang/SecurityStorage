@@ -6,4 +6,6 @@
   <string name="create_file">新建文本</string>
   <string name="save">保存</string>
   <string name="modify">修改</string>
+  <string name="null_data">暂无数据</string>
+  <string name="loading">正在获取数据...</string>
 </resources>

@@ -1,4 +1,4 @@
-package zc.neu.com.securitystorage;
+package zc.neu.com.securitystorage.Encrypt;
 
 
 import java.io.UnsupportedEncodingException;
@@ -12,10 +12,6 @@ import java.util.concurrent.ArrayBlockingQueue;
  * data: 2019.1.21
  */
 public class AES {
-
-  public static void main(String[] arg){
-    ArrayBlockingQueue<Integer> arrayBlockingQueue = new ArrayBlockingQueue<Integer>(100,true);
-  }
 
   /**
    * 加密字符串类型的明文

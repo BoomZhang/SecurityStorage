@@ -1,8 +1,12 @@
-package zc.neu.com.securitystorage;
+package zc.neu.com.securitystorage.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import zc.neu.com.securitystorage.Activity.MainActivity;
+import zc.neu.com.securitystorage.Fragment.FileFragment;
+import zc.neu.com.securitystorage.Fragment.ImageFragment;
+import zc.neu.com.securitystorage.Fragment.SettingFragment;
 
 /**
  * 创建时间：2019/2/20
@@ -25,7 +29,7 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
     }else if(position == MainActivity.IMAGE){
       return new ImageFragment();
     }else if(position == MainActivity.SETTING){
-      return null;
+      return new SettingFragment();
     }
 
     return null;

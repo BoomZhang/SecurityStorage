@@ -1,4 +1,4 @@
-package zc.neu.com.securitystorage;
+package zc.neu.com.securitystorage.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
+import zc.neu.com.securitystorage.Bean.ImageBean;
+import zc.neu.com.securitystorage.R;
 
 /**
  * 创建时间：2019/2/20
@@ -24,7 +26,6 @@ public class ImageListAdapter extends BaseAdapter {
     this.context = context;
     this.data = data;
   }
-
 
   @Override
   public int getCount() {

@@ -9,7 +9,7 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".NewTextActivity">
+    <activity android:name=".Activity.MainActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -17,11 +17,9 @@
         </intent-filter>
     </activity>
 
-    <!--<activity android:name=".NewTextActivity"-->
-      <!--android:launchMode="singleInstance"/>-->
+    <activity android:name=".Activity.NewTextActivity"/>
   </application>
 
-  <!--<uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"></uses-permission>-->
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
 </manifest>

@@ -1,10 +1,8 @@
-package zc.neu.com.securitystorage;
+package zc.neu.com.securitystorage.Util;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import java.util.ArrayList;
-
 
 /**
  * 主要对数据库操作的工具类
