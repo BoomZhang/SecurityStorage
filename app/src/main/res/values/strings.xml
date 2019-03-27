@@ -3,9 +3,11 @@
   <string name="file">文件</string>
   <string name="image">图片</string>
   <string name="setting">设置</string>
-  <string name="create_file">新建文本</string>
+  <string name="create">新建</string>
   <string name="save">保存</string>
+  <string name="read">查看</string>
   <string name="modify">修改</string>
   <string name="null_data">暂无数据</string>
   <string name="loading">正在获取数据...</string>
+  <string name="save_loading">保存中...</string>
 </resources>

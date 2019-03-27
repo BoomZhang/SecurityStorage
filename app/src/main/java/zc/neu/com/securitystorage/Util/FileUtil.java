@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import static zc.neu.com.securitystorage.Util.ConstantUtil.CHARSET;
+
 /**
  * 文件相关操作的工具类
  */
@@ -55,7 +57,7 @@ public class FileUtil {
       byte[] buffer = new byte[length];
       fis.read(buffer);
       fis.close();
-      return new String(buffer,"US-ASCII");
+      return new String(buffer,CHARSET);
     }else{
       throw new Exception("file is not exist");
     }
@@ -77,7 +79,7 @@ public class FileUtil {
     }
     text.createNewFile();
     FileOutputStream fos = new FileOutputStream(text);
-    fos.write(content.getBytes("US-ASCII"));
+    fos.write(content.getBytes(CHARSET));
     fos.close();
   }
 

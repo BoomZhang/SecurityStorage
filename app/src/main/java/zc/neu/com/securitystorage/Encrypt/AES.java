@@ -1,10 +1,9 @@
 package zc.neu.com.securitystorage.Encrypt;
 
-
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
+
+import static zc.neu.com.securitystorage.Util.ConstantUtil.CHARSET;
 
 /**
  * 封装AES加解密相关的操作
@@ -21,8 +20,8 @@ public class AES {
    */
   public static String encrypStr(String plainText, String key) throws UnsupportedEncodingException {
 
-    byte[] text = plainText.getBytes("US-ASCII");
-    byte[] keybyte = key.getBytes("US-ASCII");
+    byte[] text = plainText.getBytes(CHARSET);
+    byte[] keybyte = key.getBytes(CHARSET);
     byte[] data = new byte[16];//加密的数据块
     byte[] plain;//真正需要加密的明文，包含了结束符
 
@@ -60,8 +59,8 @@ public class AES {
    */
   public static String decrypStr(String cipherText, String key) throws UnsupportedEncodingException {
 
-    byte[] cipher = cipherText.getBytes("US-ASCII");
-    byte[] keybyte = key.getBytes("US-ASCII");
+    byte[] cipher = cipherText.getBytes(CHARSET);
+    byte[] keybyte = key.getBytes(CHARSET);
     byte[] data = new byte[16];//解密用的数据块
 
     for(int i = 0; i < cipher.length; i++){

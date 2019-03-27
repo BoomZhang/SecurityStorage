@@ -1,13 +1,22 @@
 package zc.neu.com.securitystorage.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import zc.neu.com.securitystorage.Adapter.MainFragmentAdapter;
 import zc.neu.com.securitystorage.R;
+
+import static zc.neu.com.securitystorage.Util.ConstantUtil.CREAT;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.FILE;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.IMAGE;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.SETTING;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.TYPE;
 
 /**
  * main界面
@@ -18,21 +27,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   static {
     System.loadLibrary("native-lib");
   }
-  //判断Fragment的类型
-  public static final int FILE = 0;//文本
-  public static final int IMAGE = 1;//图片
-  public static final int SETTING = 2;//设置
-
-  //新建文本或者查看文本
-  public static final int CREAT = 0;//新建
-  public static final int READ = 1;//查看
-  public static final String TYPE = "type";
 
   private static String TAG = "Main";
   private ViewPager mViewPager;
   private Button mBtFile,mBtImage,mBtSetting;
   private ActionBar mActionBar;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +73,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
       mViewPager.setCurrentItem(SETTING);
       mActionBar.setTitle(R.string.setting);
     }
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    super.onCreateOptionsMenu(menu);
+    getMenuInflater().inflate(R.menu.main,menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+      case R.id.main_bt_add:
+        gotoCreateNewFile();
+        break;
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
+  private void gotoCreateNewFile(){
+    Intent intent = new Intent(MainActivity.this, TextActivity.class);
+    intent.putExtra(TYPE,CREAT);
+    startActivity(intent);
   }
 
 }
