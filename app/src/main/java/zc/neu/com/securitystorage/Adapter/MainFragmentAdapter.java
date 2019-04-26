@@ -8,6 +8,10 @@ import zc.neu.com.securitystorage.Fragment.FileFragment;
 import zc.neu.com.securitystorage.Fragment.ImageFragment;
 import zc.neu.com.securitystorage.Fragment.SettingFragment;
 
+import static zc.neu.com.securitystorage.Util.ConstantUtil.FILE;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.IMAGE;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.SETTING;
+
 /**
  * 创建时间：2019/2/20
  * 作者：zhangchao
@@ -24,11 +28,11 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
   @Override
   public Fragment getItem(int position) {
 
-    if(position == MainActivity.FILE){
+    if(position == FILE){
       return new FileFragment();
-    }else if(position == MainActivity.IMAGE){
+    }else if(position == IMAGE){
       return new ImageFragment();
-    }else if(position == MainActivity.SETTING){
+    }else if(position == SETTING){
       return new SettingFragment();
     }
 

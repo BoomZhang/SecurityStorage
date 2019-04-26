@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import java.util.Arrays;
 import zc.neu.com.securitystorage.Adapter.MainFragmentAdapter;
+import zc.neu.com.securitystorage.Encrypt.AES;
 import zc.neu.com.securitystorage.R;
 
 import static zc.neu.com.securitystorage.Util.ConstantUtil.CREAT;
@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    initViews();
+
+    //initViews();
   }
 
   private void initViews(){
@@ -75,22 +76,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    super.onCreateOptionsMenu(menu);
-    getMenuInflater().inflate(R.menu.main,menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()){
-      case R.id.main_bt_add:
-        gotoCreateNewFile();
-        break;
-    }
-    return super.onOptionsItemSelected(item);
-  }
+  //@Override
+  //public boolean onCreateOptionsMenu(Menu menu) {
+  //  super.onCreateOptionsMenu(menu);
+  //  getMenuInflater().inflate(R.menu.main,menu);
+  //  return true;
+  //}
+  //
+  //@Override
+  //public boolean onOptionsItemSelected(MenuItem item) {
+  //  switch (item.getItemId()){
+  //    case R.id.main_bt_add:
+  //      gotoCreateNewFile();
+  //      break;
+  //  }
+  //  return super.onOptionsItemSelected(item);
+  //}
 
   private void gotoCreateNewFile(){
     Intent intent = new Intent(MainActivity.this, TextActivity.class);
