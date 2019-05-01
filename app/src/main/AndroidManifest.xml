@@ -12,22 +12,74 @@
   <uses-feature android:name="android.hardware.camera" />
   <uses-feature android:name="android.hardware.camera.autofocus" />
 
-  <application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme">
-    <activity android:name=".Activity.MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+
+  <!--<application-->
+    <!--android:allowBackup="true"-->
+    <!--android:icon="@mipmap/ic_launcher"-->
+    <!--android:label="@string/app_name"-->
+    <!--android:roundIcon="@mipmap/ic_launcher_round"-->
+    <!--android:supportsRtl="true"-->
+    <!--android:theme="@style/AppTheme">-->
+    <!--<activity android:name=".Activity.MainActivity">-->
+        <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+        <!--</intent-filter>-->
+    <!--</activity>-->
+
+    <!--<activity android:name=".Activity.TextActivity"/>-->
+  <!--</application>-->
+
+  <application
+    android:name=".MyApplication"
+    android:allowBackup="true"
+    android:icon="@drawable/ic_launcher"
+    android:label="@string/app_name" >
+
+    <!-- 便签展示界面 (主页)-->
+    <activity
+      android:name=".Activity.NoteActivity"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateHidden|adjustResize" >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
     </activity>
 
-    <activity android:name=".Activity.TextActivity"/>
+    <!-- 便签编辑界面 -->
+    <activity
+      android:name=".Activity.NoteEditActivity"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateHidden|adjustResize" />
+
+    <!-- 便签详情界面 -->
+    <activity
+      android:name=".Activity.NoteDetailActivity"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait"/>
+
+    <!-- 便签再编辑界面 -->
+    <activity
+      android:name=".Activity.NoteReEditActivity"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait"/>
+
+    <!-- 友盟 配置 -->
+    <meta-data
+      android:name="UMENG_APPKEY"
+      android:value="5644729867e58e76ea001298" />
+    <meta-data
+      android:name="UMENG_CHANNEL"
+      android:value="app store" />
+    <!-- END  友盟配置 -->
+
+
   </application>
 
 </manifest>

@@ -29,7 +29,7 @@ public class MD5 {
    */
   public static byte[] digest(String message)
       throws UnsupportedEncodingException, NoSuchAlgorithmException {
-    return getInstance().digest(message.getBytes("US-ASCII"));
+    return getInstance().digest(message.getBytes("UTF-8"));
   }
 
 }
