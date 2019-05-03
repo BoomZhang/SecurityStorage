@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -43,6 +44,7 @@ import zc.neu.com.securitystorage.Bean.Note;
 import zc.neu.com.securitystorage.R;
 import zc.neu.com.securitystorage.Util.FileUtils;
 import zc.neu.com.securitystorage.Util.ImageUtils;
+import zc.neu.com.securitystorage.Util.LogUtil;
 import zc.neu.com.securitystorage.Util.LongBlogContent;
 import zc.neu.com.securitystorage.Util.ToastUtils;
 import zc.neu.com.securitystorage.sqlite.DatabaseAccessFactory;
@@ -77,6 +79,7 @@ public class NoteEditActivity extends BaseActivity {
 	private RichEditor mContentEditor;
 	private View mBtn1, mBtn2, mBtn3, mBtn4;
 	private OnClickListener mBtnListener;
+  private Uri uri;
 
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片
 
@@ -263,16 +266,34 @@ public class NoteEditActivity extends BaseActivity {
 		if (resultCode != RESULT_OK) {
 			return;
 		}
-
 		if (requestCode == REQUEST_CODE_PICK_IMAGE) {
-			Uri uri = data.getData();
-			insertBitmap(FileUtils.getRealFilePath(this, uri));
+		  uri = data.getData();
+      if (Build.VERSION.SDK_INT >= 23) {
+        if (ContextCompat.checkSelfPermission(NoteEditActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+          ActivityCompat.requestPermissions(NoteEditActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }else{
+          insertBitmap(FileUtils.getRealFilePath(this, uri));
+          return;
+        }
+      }
+		  insertBitmap(FileUtils.getRealFilePath(this, uri));
 		} else if (requestCode == REQUEST_CODE_CAPTURE_CAMEIA) {
 			insertBitmap(mCurrentPhotoFile.getAbsolutePath());
 		}
 	}
 
-	/**
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    if(requestCode == 1){
+      if (grantResults.length > 0
+          && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        insertBitmap(FileUtils.getRealFilePath(this, uri));
+      }
+    }
+  }
+
+  /**
 	 * 添加图片到富文本剪辑器
 	 * 
 	 * @param imagePath

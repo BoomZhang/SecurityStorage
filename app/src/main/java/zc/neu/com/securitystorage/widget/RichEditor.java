@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import zc.neu.com.securitystorage.Bean.EditData;
 import zc.neu.com.securitystorage.R;
+import zc.neu.com.securitystorage.Util.LogUtil;
 
 /**
  * 以ScrollView为父容器的富文本编辑器
@@ -249,7 +250,10 @@ public class RichEditor extends ScrollView {
 	
 	/** 富文本控件插入图片的对外接口  */
 	public void insertImage(String imagePath) {
+
 		Bitmap bmp = getScaledBitmap(imagePath, getWidth());
+    LogUtil.d("imagePath = " + imagePath);
+    LogUtil.d("Bitmap == null is " + String.valueOf(bmp == null));
 		insertImage(bmp, imagePath);
 	}
 	
