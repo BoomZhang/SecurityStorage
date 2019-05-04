@@ -24,11 +24,10 @@ import static zc.neu.com.securitystorage.Util.ConstantUtil.TYPE;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
   // Used to load the 'native-lib' library on application startup.
-  static {
-    System.loadLibrary("native-lib");
-  }
+  //static {
+  //  System.loadLibrary("native-lib");
+  //}
 
-  private static String TAG = "Main";
   private ViewPager mViewPager;
   private Button mBtFile,mBtImage,mBtSetting;
   private ActionBar mActionBar;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    //initViews();
+    initViews();
   }
 
   private void initViews(){
@@ -50,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     mBtSetting = (Button) findViewById(R.id.activity_main_setting_bt);
 
     //为Button设置监听器
-    mBtFile.setOnClickListener(this);
-    mBtImage.setOnClickListener(this);
-    mBtSetting.setOnClickListener(this);
+    //mBtFile.setOnClickListener(this);
+    //mBtImage.setOnClickListener(this);
+    //mBtSetting.setOnClickListener(this);
 
     //为Viewpager设置Adapter
     MainFragmentAdapter adapter = new MainFragmentAdapter(getSupportFragmentManager());
@@ -64,16 +63,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
   @Override
   public void onClick(View v) {
-    if(v.getId() == R.id.activity_main_file_bt){
-      mViewPager.setCurrentItem(FILE);
-      mActionBar.setTitle(R.string.file);
-    }else if(v.getId() == R.id.activity_main_image_bt){
-      mViewPager.setCurrentItem(IMAGE);
-      mActionBar.setTitle(R.string.image);
-    }else{
-      mViewPager.setCurrentItem(SETTING);
-      mActionBar.setTitle(R.string.setting);
-    }
+    //if(v.getId() == R.id.activity_main_file_bt){
+    //  mViewPager.setCurrentItem(FILE);
+    //  mActionBar.setTitle(R.string.file);
+    //}else if(v.getId() == R.id.activity_main_image_bt){
+    //  mViewPager.setCurrentItem(IMAGE);
+    //  mActionBar.setTitle(R.string.image);
+    //}else{
+    //  mViewPager.setCurrentItem(SETTING);
+    //  mActionBar.setTitle(R.string.setting);
+    //}
   }
 
   //@Override
@@ -93,10 +92,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   //  return super.onOptionsItemSelected(item);
   //}
 
-  private void gotoCreateNewFile(){
-    Intent intent = new Intent(MainActivity.this, TextActivity.class);
-    intent.putExtra(TYPE,CREAT);
-    startActivity(intent);
-  }
+  //private void gotoCreateNewFile(){
+  //  Intent intent = new Intent(MainActivity.this, TextActivity.class);
+  //  intent.putExtra(TYPE,CREAT);
+  //  startActivity(intent);
+  //}
 
 }

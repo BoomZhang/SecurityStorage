@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import zc.neu.com.securitystorage.Activity.MainActivity;
 import zc.neu.com.securitystorage.Fragment.FileFragment;
 import zc.neu.com.securitystorage.Fragment.ImageFragment;
+import zc.neu.com.securitystorage.Fragment.NoteFragment;
 import zc.neu.com.securitystorage.Fragment.SettingFragment;
 
 import static zc.neu.com.securitystorage.Util.ConstantUtil.FILE;
@@ -19,7 +20,7 @@ import static zc.neu.com.securitystorage.Util.ConstantUtil.SETTING;
  */
 public class MainFragmentAdapter extends FragmentPagerAdapter {
 
-  public static final int LEN = 3;
+  public static final int LEN = 1;
 
   public MainFragmentAdapter(FragmentManager fm) {
     super(fm);
@@ -28,15 +29,15 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
   @Override
   public Fragment getItem(int position) {
 
-    if(position == FILE){
-      return new FileFragment();
-    }else if(position == IMAGE){
-      return new ImageFragment();
-    }else if(position == SETTING){
-      return new SettingFragment();
-    }
+    //if(position == FILE){
+    //  return new FileFragment();
+    //}else if(position == IMAGE){
+    //  return new ImageFragment();
+    //}else if(position == SETTING){
+    //  return new SettingFragment();
+    //}
 
-    return null;
+    return new NoteFragment();
   }
 
   @Override
