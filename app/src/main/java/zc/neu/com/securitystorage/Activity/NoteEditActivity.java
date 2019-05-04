@@ -42,6 +42,7 @@ import java.util.List;
 import zc.neu.com.securitystorage.Bean.EditData;
 import zc.neu.com.securitystorage.Bean.Note;
 import zc.neu.com.securitystorage.R;
+import zc.neu.com.securitystorage.Util.FileUtil;
 import zc.neu.com.securitystorage.Util.FileUtils;
 import zc.neu.com.securitystorage.Util.ImageUtils;
 import zc.neu.com.securitystorage.Util.LogUtil;
@@ -53,12 +54,6 @@ import zc.neu.com.securitystorage.widget.RichEditor;
 import zc.neu.com.securitystorage.widget.handwriting.WritePadDialog;
 import zc.neu.com.securitystorage.widget.handwriting.listener.WriteDialogListener;
 
-/**
- * 编辑Note页面
- * 
- * @author RenHui
- * 
- */
 @SuppressLint("SimpleDateFormat")
 public class NoteEditActivity extends BaseActivity {
 	private static final int LONG_BLOG_WIDTH = 440; // 长微博最佳宽度
@@ -245,8 +240,6 @@ public class NoteEditActivity extends BaseActivity {
 		}
 	}
 
-
-
 	public static Intent getTakePickIntent(File f) {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
@@ -295,11 +288,17 @@ public class NoteEditActivity extends BaseActivity {
 
   /**
 	 * 添加图片到富文本剪辑器
-	 * 
+	 * 在这里做一个路径转换的操作，将外部图片存到本应用包下
 	 * @param imagePath
 	 */
 	private void insertBitmap(String imagePath) {
-		mContentEditor.insertImage(imagePath);
+	  LogUtil.d("imagePath = " + imagePath);
+	  Bitmap bmp = BitmapFactory.decodeFile(imagePath);
+    try {
+      mContentEditor.insertImage(FileUtil.saveImage(bmp,getPhotoFileName()));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 	}
 
 	/** 转换编辑框内的所有内容为字符串 */

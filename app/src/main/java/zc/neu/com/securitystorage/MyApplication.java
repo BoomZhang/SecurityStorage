@@ -1,10 +1,13 @@
 package zc.neu.com.securitystorage;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Handler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import zc.neu.com.securitystorage.Util.ConstantUtil;
 import zc.neu.com.securitystorage.Util.DebugTraceTool;
+import zc.neu.com.securitystorage.Util.FileUtil;
 
 public class MyApplication extends Application {
 
@@ -14,7 +17,13 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance = this;
+      try {
+        FileUtil.initFile(this);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      ConstantUtil.CONTEXT = getApplicationContext();
+      mInstance = this;
         mHandler = new Handler();
         DebugTraceTool.debugTraceE(this, "application onCreate");
 

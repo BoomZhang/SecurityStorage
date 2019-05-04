@@ -1,5 +1,7 @@
 package zc.neu.com.securitystorage.Util;
 
+import android.content.Context;
+
 /**
  * 创建时间：2019/3/27
  * 作者：zhangchao
@@ -20,6 +22,8 @@ public class ConstantUtil {
   public static final String TYPE = "type";
 
   public static final String CHARSET = "UTF-8";
+
+  public static Context CONTEXT = null;
 
 
 }

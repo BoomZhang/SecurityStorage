@@ -83,39 +83,27 @@ public class FileUtil {
     fos.close();
   }
 
-  /**
-   * 通过图片名称获取bitmap
-   * 暂时没有添加加密过程，之后会在这里加入
-   * @param context
-   * @param imgName
-   * @return Bitmap
-   * @throws Exception
-   */
-  public static Bitmap getImage(Context context, String imgName) throws Exception {
-    File imgDir = new File(context.getFilesDir(),IMG);
-    File img = new File(imgDir,imgName);
+
+
+  public static Bitmap getImage(String imgPath, BitmapFactory.Options opts) throws Exception {
+    //File imgDir = new File(ConstantUtil.CONTEXT.getFilesDir(),IMG);
+    File img = new File(imgPath);
     if(img.exists()){
       FileInputStream fis= new FileInputStream(img);
       int length = fis.available();
       byte[] buffer = new byte[length];
       fis.read(buffer);
       fis.close();
-      return BitmapFactory.decodeByteArray(buffer,0,buffer.length);
+      return BitmapFactory.decodeByteArray(buffer,0,buffer.length,opts);
     }else{
       throw new Exception("image is not exist!");
     }
   }
 
-  /**
-   * 保存图片，未进行加解密的操作。
-   * @param context
-   * @param bitmap
-   * @param imageName
-   * @throws IOException
-   */
-  public static void saveImage(Context context, Bitmap bitmap, String imageName)
+
+  public static String saveImage(Bitmap bitmap, String imageName)
       throws IOException {
-    File imgDir = new File(context.getFilesDir(),IMG);
+    File imgDir = new File(ConstantUtil.CONTEXT.getFilesDir(),IMG);
     File img = new File(imgDir,imageName);
 
     img.createNewFile();
@@ -123,6 +111,7 @@ public class FileUtil {
     byte[] buffer = Bitmap2Bytes(bitmap);
     fos.write(buffer);
     fos.close();
+    return img.getAbsolutePath();
   }
 
   /**
@@ -130,7 +119,7 @@ public class FileUtil {
    */
   private static byte[] Bitmap2Bytes(Bitmap bm){
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+    bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
     return baos.toByteArray();
   }
 

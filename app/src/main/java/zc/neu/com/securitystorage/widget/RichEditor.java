@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import zc.neu.com.securitystorage.Bean.EditData;
 import zc.neu.com.securitystorage.R;
+import zc.neu.com.securitystorage.Util.FileUtil;
 import zc.neu.com.securitystorage.Util.LogUtil;
 
 /**
@@ -237,24 +238,26 @@ public class RichEditor extends ScrollView {
 	 * @param width view的宽度
 	 * @return
 	 */
-	private Bitmap getScaledBitmap(String filePath, int width) {
+	private Bitmap getScaledBitmap(String filePath, int width) throws Exception {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
 		BitmapFactory.decodeFile(filePath, options);
 		int sampleSize = options.outWidth > width ? options.outWidth / width + 1 : 1;
 		options.inJustDecodeBounds = false;
 		options.inSampleSize = sampleSize;
-		return BitmapFactory.decodeFile(filePath, options);
+		return FileUtil.getImage(filePath,options);
 	}
 	
 	
 	/** 富文本控件插入图片的对外接口  */
 	public void insertImage(String imagePath) {
-
-		Bitmap bmp = getScaledBitmap(imagePath, getWidth());
-    LogUtil.d("imagePath = " + imagePath);
-    LogUtil.d("Bitmap == null is " + String.valueOf(bmp == null));
-		insertImage(bmp, imagePath);
+    Bitmap bmp = null;
+    try {
+      bmp = getScaledBitmap(imagePath, getWidth());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    insertImage(bmp, imagePath);
 	}
 	
 	/**插入一张图片*/
