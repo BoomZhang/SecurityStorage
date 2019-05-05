@@ -5,14 +5,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import zc.neu.com.securitystorage.sqlite.tables.NoteAccessor;
 
-/**
- * 数据库访问工厂
- * 
- * @author renhui
- *
- */
+
 public class DatabaseAccessFactory {
-	private static final String mDbName = "richtext.db";
+	private static final String mDbName = "ss.db";
 	private static final int mDbVersion = 1;
 
 	private static DatabaseAccessFactory mInstance;

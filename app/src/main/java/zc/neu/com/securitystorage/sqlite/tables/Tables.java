@@ -1,9 +1,6 @@
 package zc.neu.com.securitystorage.sqlite.tables;
 
-/**
- * 数据库表定义
- * @author renhui
- */
+
 public class Tables {
 	/**********************************************
 	 *  SQLite V1

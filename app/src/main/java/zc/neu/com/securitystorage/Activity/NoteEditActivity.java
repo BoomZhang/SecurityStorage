@@ -45,7 +45,6 @@ import zc.neu.com.securitystorage.R;
 import zc.neu.com.securitystorage.Util.FileUtil;
 import zc.neu.com.securitystorage.Util.FileUtils;
 import zc.neu.com.securitystorage.Util.ImageUtils;
-import zc.neu.com.securitystorage.Util.LogUtil;
 import zc.neu.com.securitystorage.Util.LongBlogContent;
 import zc.neu.com.securitystorage.Util.ToastUtils;
 import zc.neu.com.securitystorage.sqlite.DatabaseAccessFactory;
@@ -216,11 +215,11 @@ public class NoteEditActivity extends BaseActivity {
 				InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(mActionBarTitle.getWindowToken(), 0);
 				// 跳转
-				Intent intent = new Intent(NoteEditActivity.this,
-						NoteActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(intent);
+				//Intent intent = new Intent(NoteEditActivity.this,
+				//		NoteActivity.class);
+				//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				//startActivity(intent);
 				finish();
 			}
 		});
@@ -292,7 +291,6 @@ public class NoteEditActivity extends BaseActivity {
 	 * @param imagePath
 	 */
 	private void insertBitmap(String imagePath) {
-	  LogUtil.d("imagePath = " + imagePath);
 	  Bitmap bmp = BitmapFactory.decodeFile(imagePath);
     try {
       mContentEditor.insertImage(FileUtil.saveImage(bmp,getPhotoFileName()));

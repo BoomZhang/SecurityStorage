@@ -15,6 +15,8 @@ import zc.neu.com.securitystorage.R;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.CREAT;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.FILE;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.IMAGE;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.NOTE;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.PROVIDER;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.SETTING;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.TYPE;
 
@@ -49,53 +51,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     mBtSetting = (Button) findViewById(R.id.activity_main_setting_bt);
 
     //为Button设置监听器
-    //mBtFile.setOnClickListener(this);
-    //mBtImage.setOnClickListener(this);
-    //mBtSetting.setOnClickListener(this);
+    mBtFile.setOnClickListener(this);
+    mBtImage.setOnClickListener(this);
+    mBtSetting.setOnClickListener(this);
 
     //为Viewpager设置Adapter
     MainFragmentAdapter adapter = new MainFragmentAdapter(getSupportFragmentManager());
     mViewPager.setAdapter(adapter);
     //Activity创建时设置默认的Fragment
-    mViewPager.setCurrentItem(FILE);
-    mActionBar.setTitle(R.string.file);
+    mViewPager.setCurrentItem(PROVIDER);
+    mActionBar.setTitle(R.string.provider);
   }
 
   @Override
   public void onClick(View v) {
-    //if(v.getId() == R.id.activity_main_file_bt){
-    //  mViewPager.setCurrentItem(FILE);
-    //  mActionBar.setTitle(R.string.file);
-    //}else if(v.getId() == R.id.activity_main_image_bt){
-    //  mViewPager.setCurrentItem(IMAGE);
-    //  mActionBar.setTitle(R.string.image);
-    //}else{
-    //  mViewPager.setCurrentItem(SETTING);
-    //  mActionBar.setTitle(R.string.setting);
-    //}
+    if(v.getId() == mBtFile.getId()){
+      mViewPager.setCurrentItem(PROVIDER);
+      mActionBar.setTitle(R.string.provider);
+    }else if(v.getId() == mBtImage.getId()){
+      mViewPager.setCurrentItem(NOTE);
+      mActionBar.setTitle(R.string.note);
+    }else if(v.getId() == mBtSetting.getId()){
+      mViewPager.setCurrentItem(SETTING);
+      mActionBar.setTitle(R.string.setting);
+    }
   }
-
-  //@Override
-  //public boolean onCreateOptionsMenu(Menu menu) {
-  //  super.onCreateOptionsMenu(menu);
-  //  getMenuInflater().inflate(R.menu.main,menu);
-  //  return true;
-  //}
-  //
-  //@Override
-  //public boolean onOptionsItemSelected(MenuItem item) {
-  //  switch (item.getItemId()){
-  //    case R.id.main_bt_add:
-  //      gotoCreateNewFile();
-  //      break;
-  //  }
-  //  return super.onOptionsItemSelected(item);
-  //}
-
-  //private void gotoCreateNewFile(){
-  //  Intent intent = new Intent(MainActivity.this, TextActivity.class);
-  //  intent.putExtra(TYPE,CREAT);
-  //  startActivity(intent);
-  //}
 
 }

@@ -3,14 +3,12 @@ package zc.neu.com.securitystorage.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import zc.neu.com.securitystorage.Activity.MainActivity;
-import zc.neu.com.securitystorage.Fragment.FileFragment;
-import zc.neu.com.securitystorage.Fragment.ImageFragment;
 import zc.neu.com.securitystorage.Fragment.NoteFragment;
+import zc.neu.com.securitystorage.Fragment.ProviderFragment;
 import zc.neu.com.securitystorage.Fragment.SettingFragment;
 
-import static zc.neu.com.securitystorage.Util.ConstantUtil.FILE;
-import static zc.neu.com.securitystorage.Util.ConstantUtil.IMAGE;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.NOTE;
+import static zc.neu.com.securitystorage.Util.ConstantUtil.PROVIDER;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.SETTING;
 
 /**
@@ -20,7 +18,7 @@ import static zc.neu.com.securitystorage.Util.ConstantUtil.SETTING;
  */
 public class MainFragmentAdapter extends FragmentPagerAdapter {
 
-  public static final int LEN = 1;
+  public static final int LEN = 3;
 
   public MainFragmentAdapter(FragmentManager fm) {
     super(fm);
@@ -29,15 +27,14 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
   @Override
   public Fragment getItem(int position) {
 
-    //if(position == FILE){
-    //  return new FileFragment();
-    //}else if(position == IMAGE){
-    //  return new ImageFragment();
-    //}else if(position == SETTING){
-    //  return new SettingFragment();
-    //}
-
-    return new NoteFragment();
+    if(position == PROVIDER){
+      return new ProviderFragment();
+    }else if(position == NOTE){
+      return new NoteFragment();
+    }else if(position == SETTING){
+      return new SettingFragment();
+    }
+    return null;
   }
 
   @Override

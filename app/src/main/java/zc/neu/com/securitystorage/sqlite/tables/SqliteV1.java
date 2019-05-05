@@ -10,8 +10,8 @@ public class SqliteV1 implements SqliteInterface {
 					+ Tables.mNoteNativeId + " TEXT NOT NULL, " 
 					+ Tables.mNoteTitle + " TEXT NOT NULL, " 
 					+ Tables.mNoteContent + " TEXT NOT NULL, " 
-					+ Tables.mNoteCreateTime + " LONG NOT NULL, " 
-					+ Tables.mNoteModifyTime + " LONG NOT NULL "  +" );";
+					+ Tables.mNoteCreateTime + " Text NOT NULL, "
+					+ Tables.mNoteModifyTime + " Text NOT NULL "  +" );";
 	
 	@Override
 	public boolean onCreate(SQLiteDatabase database) {

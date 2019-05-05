@@ -31,8 +31,8 @@ public class NoteAccessor extends TableAccessor {
 		note.nativeId = c.getString(c.getColumnIndex(Tables.mNoteNativeId));
 		note.title = c.getString(c.getColumnIndex(Tables.mNoteTitle));
 		note.content = c.getString(c.getColumnIndex(Tables.mNoteContent));
-		note.createTime = c.getLong(c.getColumnIndex(Tables.mNoteCreateTime));
-		note.modifyTime = c.getLong(c.getColumnIndex(Tables.mNoteModifyTime));
+		note.createTime = Long.parseLong(c.getString(c.getColumnIndex(Tables.mNoteCreateTime)));
+		note.modifyTime = Long.parseLong(c.getString(c.getColumnIndex(Tables.mNoteModifyTime)));
 		return note;
 	}
 	
@@ -48,13 +48,12 @@ public class NoteAccessor extends TableAccessor {
 		cv.put(Tables.mNoteNativeId, note.nativeId);
 		cv.put(Tables.mNoteTitle, note.title);
 		cv.put(Tables.mNoteContent, note.content);
-		cv.put(Tables.mNoteCreateTime, note.createTime);
-		cv.put(Tables.mNoteModifyTime, note.modifyTime);
+		cv.put(Tables.mNoteCreateTime, String.valueOf(note.createTime));
+		cv.put(Tables.mNoteModifyTime, String.valueOf(note.modifyTime));
 		long num = mDatabase.insert(Tables.mNoteTable, null, cv);
 		DebugTraceTool.debugTraceE(this, "insert number " + num);
 	}
-	
-	
+
 	/** 查询所有的便签  */
 	public ArrayList<Note> getNotes() {
 		ArrayList<Note> list = new ArrayList<Note>();

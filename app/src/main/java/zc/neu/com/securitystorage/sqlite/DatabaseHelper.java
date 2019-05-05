@@ -19,12 +19,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		/***数据库升级代码  ---- 目前是第一版,不需要数据库升级**/
-//		switch (oldVersion) {
-//		case 1:
-//			break;
-//		default:
-//			break;
-//		}
 	}
 }
