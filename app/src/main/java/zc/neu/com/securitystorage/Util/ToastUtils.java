@@ -3,10 +3,6 @@ package zc.neu.com.securitystorage.Util;
 import android.widget.Toast;
 import zc.neu.com.securitystorage.MyApplication;
 
-/**
- * Toast工具类
- * @author renhui
- */
 public class ToastUtils {
 
     public static void show(final String message) {

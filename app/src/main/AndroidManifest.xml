@@ -62,7 +62,16 @@
       android:value="app store" />
     <!-- END  友盟配置 -->
 
+    <provider android:name=".Provider.MyProvider"
+      android:authorities="zc.neu.com.securitystorage.Provider.MyProvider"
+      android:permission="zc.neu.com.securitystorage.Provider.PPROVIDER"
+      android:grantUriPermissions="true"
+      android:exported="true"/>
+
 
   </application>
+
+  <permission android:name="zc.neu.com.securitystorage.Provider.PROVIDER"
+    android:protectionLevel="normal"/>
 
 </manifest>

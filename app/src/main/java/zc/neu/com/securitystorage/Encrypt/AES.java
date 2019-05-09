@@ -1,90 +1,103 @@
 package zc.neu.com.securitystorage.Encrypt;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-
-import static zc.neu.com.securitystorage.Util.ConstantUtil.CHARSET;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
- * 封装AES加解密相关的操作
- * author: zhangchao
- * data: 2019.1.21
+ * 创建时间：2019/5/7
+ * 作者：zhangchao
+ * 描述：新的AES纯java实现
  */
 public class AES {
 
-  /**
-   * 加密字符串类型的明文
-   * @param plainText 明文
-   * @param key 秘钥
-   * @return 密文
-   */
-  public static String encrypStr(String plainText, String key) throws UnsupportedEncodingException {
+  private static final String KEY_ALGORITHM = "AES";
+  private static final String DEFAULT_CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";//默认的加密算法
 
-    byte[] text = plainText.getBytes(CHARSET);
-    byte[] keybyte = key.getBytes(CHARSET);
-    byte[] data = new byte[16];//加密的数据块
-    byte[] plain;//真正需要加密的明文，包含了结束符
+  public static byte[] initSecretKey() {
 
-    /**
-     * 为需要加密的数据添加结束符，
-     * 如果模8为0则不需要结束符，否则需要添加结束符“0x03”
-     */
-    if(text.length % 8 == 0){
-      plain = new byte[text.length];
-      System.arraycopy(text,0,plain,0,text.length);
-    }else{
-      plain = new byte[(text.length / 8 + 1) * 8];
-      System.arraycopy(text,0,plain,0,text.length);
-      plain[text.length] = (byte)0x03;
+    //返回生成指定算法密钥生成器的 KeyGenerator 对象
+    KeyGenerator kg;
+    kg = null;
+    try {
+      kg = KeyGenerator.getInstance(KEY_ALGORITHM);
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+      return new byte[0];
     }
-    /**
-     * 加密过程，暂时采用ECB方式(密码本模式)
-     * 之后会根据需要采取更加安全的模式
-     */
-    for(int i = 0; i < plain.length; i = i + 16){
-      Arrays.fill(data,(byte)0);
-      System.arraycopy(plain,i,data,0,16);
-      data = AesEncryptC(data,keybyte);
-      System.arraycopy(data,0,plain,i,16);
-    }
-
-    return new String(plain);
+    //初始化此密钥生成器，使其具有确定的密钥大小
+    //AES 要求密钥长度为 128
+    kg.init(128);
+    //生成一个密钥
+    SecretKey secretKey = kg.generateKey();
+    return secretKey.getEncoded();
   }
 
-  /**
-   * 解密字符串类型的密文
-   * @param cipherText 密文
-   * @param key 秘钥
-   * @return 明文
-   */
-  public static String decrypStr(String cipherText, String key) throws UnsupportedEncodingException {
-
-    byte[] cipher = cipherText.getBytes(CHARSET);
-    byte[] keybyte = key.getBytes(CHARSET);
-    byte[] data = new byte[16];//解密用的数据块
-
-    for(int i = 0; i < cipher.length; i++){
-      Arrays.fill(data,(byte) 0);
-      System.arraycopy(cipher,i,data,0,16);
-      data = AesDecryptC(data,keybyte);
-      System.arraycopy(data,0,cipher,i,16);
-    }
-    /**
-     * 发现文本的结束符"0x03"
-     * 根据结束符截取真实的明文
-     */
-    for(int i = 0; i < cipher.length; i++){
-      if(cipher[i] == (byte) 0x03){
-        byte[] bytes = new byte[i];
-        System.arraycopy(cipher,0,bytes,0,i);
-        return new String(bytes);
-      }
-    }
-
-    return new String(cipher);
+  private static Key toKey(byte[] key){
+    //生成密钥
+    return new SecretKeySpec(key, KEY_ALGORITHM);
   }
 
-  public static native byte[] AesEncryptC(byte[] plainText, byte[] key);
-  public static native byte[] AesDecryptC(byte[] cipherText, byte[] key);
+  public static byte[] encrypt(byte[] data,Key key) throws Exception{
+    return encrypt(data, key,DEFAULT_CIPHER_ALGORITHM);
+  }
+
+  public static byte[] encrypt(byte[] data,byte[] key) throws Exception{
+    return encrypt(data, key,DEFAULT_CIPHER_ALGORITHM);
+  }
+
+  public static byte[] encrypt(byte[] data,byte[] key,String cipherAlgorithm) throws Exception{
+    //还原密钥
+    Key k = toKey(key);
+    return encrypt(data, k, cipherAlgorithm);
+  }
+
+  public static byte[] encrypt(byte[] data, Key key,String cipherAlgorithm) throws Exception{
+    //实例化
+    Cipher cipher = Cipher.getInstance(cipherAlgorithm);
+    //使用密钥初始化，设置为加密模式
+    cipher.init(Cipher.ENCRYPT_MODE, key);
+    //执行操作
+    return cipher.doFinal(data);
+  }
+
+  public static byte[] decrypt(byte[] data,byte[] key) throws Exception{
+    return decrypt(data, key,DEFAULT_CIPHER_ALGORITHM);
+  }
+
+  public static byte[] decrypt(byte[] data,Key key) throws Exception{
+    return decrypt(data, key,DEFAULT_CIPHER_ALGORITHM);
+  }
+
+  public static byte[] decrypt(byte[] data,byte[] key,String cipherAlgorithm) throws Exception{
+    //还原密钥
+    Key k = toKey(key);
+    return decrypt(data, k, cipherAlgorithm);
+  }
+
+  public static byte[] decrypt(byte[] data,Key key,String cipherAlgorithm) throws Exception{
+    //实例化
+    Cipher cipher = Cipher.getInstance(cipherAlgorithm);
+    //使用密钥初始化，设置为解密模式
+    cipher.init(Cipher.DECRYPT_MODE, key);
+    //执行操作
+    return cipher.doFinal(data);
+  }
+
+  private static String  showByteArray(byte[] data){
+    if(null == data){
+      return null;
+    }
+    StringBuilder sb = new StringBuilder("{");
+    for(byte b:data){
+      sb.append(b).append(",");
+    }
+    sb.deleteCharAt(sb.length()-1);
+    sb.append("}");
+    return sb.toString();
+  }
 
 }

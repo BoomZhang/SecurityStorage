@@ -1,24 +1,17 @@
 package zc.neu.com.securitystorage.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import java.util.Arrays;
 import zc.neu.com.securitystorage.Adapter.MainFragmentAdapter;
-import zc.neu.com.securitystorage.Encrypt.AES;
 import zc.neu.com.securitystorage.R;
 
-import static zc.neu.com.securitystorage.Util.ConstantUtil.CREAT;
-import static zc.neu.com.securitystorage.Util.ConstantUtil.FILE;
-import static zc.neu.com.securitystorage.Util.ConstantUtil.IMAGE;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.NOTE;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.PROVIDER;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.SETTING;
-import static zc.neu.com.securitystorage.Util.ConstantUtil.TYPE;
 
 /**
  * main界面

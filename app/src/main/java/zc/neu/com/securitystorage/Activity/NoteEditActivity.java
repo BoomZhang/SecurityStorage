@@ -215,11 +215,11 @@ public class NoteEditActivity extends BaseActivity {
 				InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(mActionBarTitle.getWindowToken(), 0);
 				// 跳转
-				//Intent intent = new Intent(NoteEditActivity.this,
-				//		NoteActivity.class);
-				//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				//startActivity(intent);
+				Intent intent = new Intent(NoteEditActivity.this,
+						MainActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
 				finish();
 			}
 		});

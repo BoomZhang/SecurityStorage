@@ -13,7 +13,7 @@ using namespace std;
 typedef bitset<8> byte;
 typedef bitset<32> word;
 
-const int Nr = 10;  // AES-128需要 10 轮加密
+const int Nr = 10;  // AES_old-128需要 10 轮加密
 const int Nk = 4;   // Nk 表示输入密钥的 word 个数
 
 byte S_Box[16][16] = {
@@ -54,7 +54,7 @@ byte Inv_S_Box[16][16] = {
         {0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D}
 };
 
-// 轮常数，密钥扩展中用到。（AES-128只需要10轮）
+// 轮常数，密钥扩展中用到。（AES_old-128只需要10轮）
 word Rcon[10] = { 0x01000000, 0x02000000, 0x04000000, 0x08000000, 0x10000000,
                   0x20000000, 0x40000000, 0x80000000, 0x1b000000, 0x36000000 };
 

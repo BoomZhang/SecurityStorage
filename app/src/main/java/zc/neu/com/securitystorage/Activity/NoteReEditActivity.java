@@ -230,10 +230,10 @@ public class NoteReEditActivity extends Activity implements View.OnClickListener
 
 				ToastUtils.show(R.string.note_saved);
 				// 跳转
-				//Intent intent = new Intent(NoteReEditActivity.this, NoteActivity.class);
-				//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				//startActivity(intent);
+				Intent intent = new Intent(NoteReEditActivity.this, MainActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
 				finish();
 			}
 		});

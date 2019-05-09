@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import zc.neu.com.securitystorage.sqlite.tables.NoteAccessor;
-
+import zc.neu.com.securitystorage.sqlite.tables.RegistAccessor;
 
 public class DatabaseAccessFactory {
 	private static final String mDbName = "ss.db";
@@ -16,6 +16,8 @@ public class DatabaseAccessFactory {
 	private SQLiteDatabase mDatabase;
 
 	private NoteAccessor mNoteAccessor;
+	private RegistAccessor mRegistAccessor;
+
 
 	private DatabaseAccessFactory(Context context) {
 		super();
@@ -23,9 +25,8 @@ public class DatabaseAccessFactory {
 		if (mDatabase ==null || !mDatabase.isOpen()) {
 			openDatabase();
 		}
-		
 		this.mNoteAccessor = new NoteAccessor(this.mDatabase);
-
+		this.mRegistAccessor = new RegistAccessor(this.mDatabase);
 	}
 
 	/** 获取数据库访问实例 */
@@ -40,6 +41,10 @@ public class DatabaseAccessFactory {
 	public NoteAccessor noteAccessor() {
 		return this.mNoteAccessor;
 	}
+
+	public RegistAccessor registAccessor(){
+	  return this.mRegistAccessor;
+  }
 
 	public static synchronized void shutdown() {
 		if (mInstance != null) {

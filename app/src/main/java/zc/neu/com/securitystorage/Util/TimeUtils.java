@@ -4,10 +4,6 @@ import android.annotation.SuppressLint;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * 时间处理工具类
- * @author Renhui
- */
 public class TimeUtils {
 	@SuppressLint("SimpleDateFormat")
 	public static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
