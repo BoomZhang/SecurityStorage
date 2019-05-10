@@ -8,11 +8,7 @@ import java.util.ArrayList;
 import zc.neu.com.securitystorage.Bean.Note;
 import zc.neu.com.securitystorage.Util.DebugTraceTool;
 
-/**
- * Note数据库操作
- * @author renhui
- *
- */
+
 public class NoteAccessor extends TableAccessor {
 	
 	private static final String[] noteColumnList =
@@ -69,5 +65,9 @@ public class NoteAccessor extends TableAccessor {
 		}
 		return list;
 	}
+
+	private String encry(String str){
+
+  }
 	
 }

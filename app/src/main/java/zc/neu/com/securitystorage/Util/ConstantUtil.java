@@ -10,17 +10,6 @@ import zc.neu.com.securitystorage.Encrypt.AES;
  */
 public class ConstantUtil {
 
-  //判断Fragment的类型
-  public static final int FILE = 0;//文本
-  public static final int IMAGE = 1;//图片
-
-
-  //新建、查看、修改文本
-  public static final int CREAT = 0;//新建
-  public static final int READ = 1;//查看
-  public static final int MODIFY = 2;//修改
-
-
   //Fragment的类型
   public static final int PROVIDER = 0;//对外提供数据
   public static final int NOTE = 1;//富文本笔记

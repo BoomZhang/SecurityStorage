@@ -1,5 +1,6 @@
 package zc.neu.com.securitystorage.Encrypt;
 
+import android.util.Base64;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
@@ -53,6 +54,18 @@ public class AES {
     //还原密钥
     Key k = toKey(key);
     return encrypt(data, k, cipherAlgorithm);
+  }
+
+  public static String encryptStr(String pt,byte[] key) throws Exception {
+    byte[] ptB = pt.getBytes("UTF-8");
+    byte[] ctB = encrypt(ptB,key);
+    return Base64.encodeToString(ctB,0);
+  }
+
+  public static String decryptStr(String ct, byte[] key) throws Exception{
+    byte[] ctB = Base64.decode(ct,0);
+    byte[] ptB = decrypt(ctB,key);
+    return new String(ptB,"UTF-8");
   }
 
   public static byte[] encrypt(byte[] data, Key key,String cipherAlgorithm) throws Exception{

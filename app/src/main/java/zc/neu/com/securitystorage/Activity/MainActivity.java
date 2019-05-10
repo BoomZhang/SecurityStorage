@@ -9,6 +9,7 @@ import android.widget.Button;
 import zc.neu.com.securitystorage.Adapter.MainFragmentAdapter;
 import zc.neu.com.securitystorage.R;
 
+import static zc.neu.com.securitystorage.Util.ConstantUtil.CONTEXT;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.NOTE;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.PROVIDER;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.SETTING;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
+    CONTEXT = getApplicationContext();
     initViews();
   }
 
