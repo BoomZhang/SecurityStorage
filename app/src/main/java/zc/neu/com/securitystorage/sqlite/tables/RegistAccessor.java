@@ -35,13 +35,18 @@ public class RegistAccessor extends TableAccessor {
   private String createNewCode(String appName)
       throws Exception {
     String currentTime = TimeUtils.getCurrentTimeInString();
-    String registCode = new String(Base64.encode(MD5.digest(currentTime),0));
+    String registCode = Base64.encodeToString(MD5.digest(currentTime),0);
     ContentValues values = new ContentValues();
     values.put(Tables.mRegistAppName,appName);
     values.put(Tables.RegistCode,registCode);
     values.put(Tables.Time,currentTime);
     mDatabase.insert(Tables.mRegistTable,null,values);
     return registCode;
+  }
+
+  public void unRegist(String registCode){
+    String sql = "delete from " + Tables.mRegistTable + " where " + Tables.RegistCode + "=" + registCode;
+    mDatabase.execSQL(sql);
   }
 
 }

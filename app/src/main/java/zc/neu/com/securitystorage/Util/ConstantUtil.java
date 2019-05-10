@@ -1,6 +1,7 @@
 package zc.neu.com.securitystorage.Util;
 
 import android.content.Context;
+import zc.neu.com.securitystorage.Encrypt.AES;
 
 /**
  * 创建时间：2019/3/27
@@ -31,5 +32,7 @@ public class ConstantUtil {
 
   //Application的上下文环境
   public static Context CONTEXT = null;
+
+  public static byte[] APPKEY = AES.initSecretKey();
 
 }

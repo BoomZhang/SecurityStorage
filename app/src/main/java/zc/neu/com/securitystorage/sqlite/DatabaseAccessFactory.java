@@ -3,11 +3,13 @@ package zc.neu.com.securitystorage.sqlite;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import zc.neu.com.securitystorage.sqlite.tables.KVAccessor;
+import zc.neu.com.securitystorage.sqlite.tables.KeyAccessor;
 import zc.neu.com.securitystorage.sqlite.tables.NoteAccessor;
 import zc.neu.com.securitystorage.sqlite.tables.RegistAccessor;
 
 public class DatabaseAccessFactory {
-	private static final String mDbName = "ss.db";
+	private static final String mDbName = "info.db";
 	private static final int mDbVersion = 1;
 
 	private static DatabaseAccessFactory mInstance;
@@ -17,7 +19,8 @@ public class DatabaseAccessFactory {
 
 	private NoteAccessor mNoteAccessor;
 	private RegistAccessor mRegistAccessor;
-
+	private KVAccessor mKVAccessor;
+	private KeyAccessor mKeyAccessor;
 
 	private DatabaseAccessFactory(Context context) {
 		super();
@@ -27,6 +30,8 @@ public class DatabaseAccessFactory {
 		}
 		this.mNoteAccessor = new NoteAccessor(this.mDatabase);
 		this.mRegistAccessor = new RegistAccessor(this.mDatabase);
+		this.mKVAccessor = new KVAccessor(this.mDatabase);
+		this.mKeyAccessor = new KeyAccessor(this.mDatabase);
 	}
 
 	/** 获取数据库访问实例 */
@@ -44,6 +49,14 @@ public class DatabaseAccessFactory {
 
 	public RegistAccessor registAccessor(){
 	  return this.mRegistAccessor;
+  }
+
+  public KVAccessor kvAccessor(){
+	  return this.mKVAccessor;
+  }
+
+  public KeyAccessor keyAccessor(){
+	  return this.mKeyAccessor;
   }
 
 	public static synchronized void shutdown() {

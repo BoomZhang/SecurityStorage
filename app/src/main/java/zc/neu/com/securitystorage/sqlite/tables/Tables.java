@@ -44,4 +44,12 @@ public class Tables {
   public static final String mRegistAppName = "appname";
   //public static final String mRegistCode = "code";
 
+  /**
+   * SQLite 解密时的Cache表
+   */
+  public static final String mCacheTable = "cachetable";
+  public static final String mCacheId = "id";
+  public static final String mCacheKey = "key";
+  public static final String mCacheValue = "value";
+
 }

@@ -2,6 +2,9 @@ package zc.neu.com.securitystorage.Provider;
 
 import android.content.ContentValues;
 import android.net.Uri;
+import zc.neu.com.securitystorage.sqlite.DatabaseAccessFactory;
+
+import static zc.neu.com.securitystorage.Util.ConstantUtil.CONTEXT;
 
 /**
  * 创建时间：2019/5/9
@@ -11,6 +14,9 @@ import android.net.Uri;
 public class DbManger {
 
   private static DbManger instance;
+
+  private static final String HOST = "content://zc.neu.com.securitystorage.Provider.MyProvider/";
+  private static final String PATH = "finish";
 
   private static final String REGIST = "/regist";
   private static final String UNREGIST = "/unregist";
@@ -33,7 +39,7 @@ public class DbManger {
    * @param values
    * @return
    */
-  private Uri todo(Uri uri, ContentValues values){
+  public Uri todo(Uri uri, ContentValues values){
     String path = uri.getPath();
     if(REGIST.equals(path)){
       return regist(uri,values);
@@ -46,17 +52,30 @@ public class DbManger {
   }
 
   private Uri regist(Uri uri, ContentValues values){
-
-
-
-    return null;
+    String query = uri.getQuery();
+    String registCode = null;
+    try {
+      registCode = DatabaseAccessFactory.getInstance(CONTEXT).registAccessor().regist(query);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return Uri.parse(HOST + PATH + "?" + registCode);
   }
 
   private Uri unregist(Uri uri, ContentValues values){
+    String query = uri.getQuery();
+    DatabaseAccessFactory.getInstance(CONTEXT).registAccessor().unRegist(query);
     return null;
   }
 
   private Uri insert(Uri uri, ContentValues values){
+
+    try {
+      DatabaseAccessFactory.getInstance(CONTEXT).
+          kvAccessor().insert(uri.getQuery(),values);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return null;
   }
 
