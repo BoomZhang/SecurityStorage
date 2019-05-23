@@ -15,10 +15,6 @@ import static zc.neu.com.securitystorage.Util.ConstantUtil.CONTEXT;
  */
 public class MyProvider extends ContentProvider {
 
-  //private Context mContext;
-  //DatabaseHelper mDbHelper = null;
-  //SQLiteDatabase db = null;
-
   @Override
   public boolean onCreate() {
     return false;

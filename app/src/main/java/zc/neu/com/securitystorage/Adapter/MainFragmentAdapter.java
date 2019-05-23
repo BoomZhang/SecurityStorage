@@ -3,9 +3,9 @@ package zc.neu.com.securitystorage.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import zc.neu.com.securitystorage.Fragment.NoteFragment;
-import zc.neu.com.securitystorage.Fragment.ProviderFragment;
-import zc.neu.com.securitystorage.Fragment.SettingFragment;
+import zc.neu.com.securitystorage.Activity.NoteFragment;
+import zc.neu.com.securitystorage.Activity.ProviderFragment;
+import zc.neu.com.securitystorage.Activity.SettingFragment;
 
 import static zc.neu.com.securitystorage.Util.ConstantUtil.NOTE;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.PROVIDER;
@@ -28,10 +28,13 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
   public Fragment getItem(int position) {
 
     if(position == PROVIDER){
+      //对外数据接口模块
       return new ProviderFragment();
     }else if(position == NOTE){
+      //富文本编辑器模块
       return new NoteFragment();
     }else if(position == SETTING){
+      //访问控制模块
       return new SettingFragment();
     }
     return null;

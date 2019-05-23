@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import zc.neu.com.securitystorage.Bean.Note;
 import zc.neu.com.securitystorage.Util.DebugTraceTool;
-
+import zc.neu.com.securitystorage.Util.LogUtil;
 
 public class NoteAccessor extends TableAccessor {
 	
@@ -50,6 +50,18 @@ public class NoteAccessor extends TableAccessor {
 		DebugTraceTool.debugTraceE(this, "insert number " + num);
 	}
 
+	public synchronized void delete(String nativeId){
+	  //String sql = "delete * from "+ Tables.mNoteTable + " where " + Tables.mNoteNativeId + "=" + "'" + nativeId + "'";
+	  //mDatabase.execSQL(sql);
+    if(nativeId == null || "".equals(nativeId)){
+      LogUtil.d("mNativeId == null");
+      return;
+    }
+	  mDatabase.delete(Tables.mNoteTable,Tables.mNoteNativeId + " = ?",new String[]{nativeId});
+	}
+
+
+
 	/** 查询所有的便签  */
 	public ArrayList<Note> getNotes() {
 		ArrayList<Note> list = new ArrayList<Note>();
@@ -66,8 +78,8 @@ public class NoteAccessor extends TableAccessor {
 		return list;
 	}
 
-	private String encry(String str){
-
-  }
+	//private String encry(String str){
+  //
+  //}
 	
 }

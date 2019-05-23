@@ -1,4 +1,4 @@
-package zc.neu.com.securitystorage.Fragment;
+package zc.neu.com.securitystorage.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -20,8 +20,9 @@ public class NoteDetailActivity extends BaseActivity {
 	private ActionBar mActionBar;
 	private TextView mActionBarTitle;
 	private LinearLayout mNoteDetailContent;
+  private String mNativeId;
 
-	@Override
+  @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_note_detail);
@@ -29,6 +30,7 @@ public class NoteDetailActivity extends BaseActivity {
 		Intent intent = getIntent();
 		mNoteTitle = intent.getStringExtra("note_title");
 		mNoteContent = intent.getStringExtra("note_content");
+    mNativeId = getIntent().getStringExtra("note_id");
 
 		setUpActionBar();
 
@@ -78,6 +80,7 @@ public class NoteDetailActivity extends BaseActivity {
 				Intent intent = new Intent(NoteDetailActivity.this, NoteReEditActivity.class);
 				intent.putExtra("note_title", mNoteTitle);
 				intent.putExtra("note_content", mNoteContent);
+				intent.putExtra("note_id",mNativeId);
 				startActivity(intent);
 				finish();
 			}

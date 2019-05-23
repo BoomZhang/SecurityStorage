@@ -34,12 +34,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     setContentView(R.layout.activity_main);
     CONTEXT = getApplicationContext();
     initViews();
+    //getContentResolver()
   }
 
   private void initViews(){
     //绑定控件
     mActionBar = this.getSupportActionBar();
-    mViewPager = (ViewPager) findViewById(R.id.activity_main_viewpage);
+
     mBtFile = (Button) findViewById(R.id.activity_main_file_bt);
     mBtImage = (Button) findViewById(R.id.activity_main_image_bt);
     mBtSetting = (Button) findViewById(R.id.activity_main_setting_bt);
@@ -49,10 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     mBtImage.setOnClickListener(this);
     mBtSetting.setOnClickListener(this);
 
-    //为Viewpager设置Adapter
+    mViewPager = (ViewPager) findViewById(R.id.activity_main_viewpage);
     MainFragmentAdapter adapter = new MainFragmentAdapter(getSupportFragmentManager());
     mViewPager.setAdapter(adapter);
-    //Activity创建时设置默认的Fragment
     mViewPager.setCurrentItem(PROVIDER);
     mActionBar.setTitle(R.string.provider);
   }

@@ -32,6 +32,7 @@ import zc.neu.com.securitystorage.R;
 import zc.neu.com.securitystorage.Util.DebugTraceTool;
 import zc.neu.com.securitystorage.Util.FileUtils;
 import zc.neu.com.securitystorage.Util.ImageUtils;
+import zc.neu.com.securitystorage.Util.LogUtil;
 import zc.neu.com.securitystorage.Util.ToastUtils;
 import zc.neu.com.securitystorage.sqlite.DatabaseAccessFactory;
 import zc.neu.com.securitystorage.widget.RichEditView;
@@ -53,6 +54,7 @@ public class NoteReEditActivity extends Activity implements View.OnClickListener
 
 	private String mNoteTitle;
 	private String mNoteContent;
+	private String mNativeId;
 
 	private EditText mTitleEditor;
 	private LinearLayout mContentEditor;
@@ -66,6 +68,12 @@ public class NoteReEditActivity extends Activity implements View.OnClickListener
 
 		mNoteTitle = getIntent().getStringExtra("note_title");
 		mNoteContent = getIntent().getStringExtra("note_content");
+		mNativeId = getIntent().getStringExtra("note_id");
+		if(mNativeId == null || "".equals(mNativeId)){
+      LogUtil.d("mNativeId == null");
+    }else{
+      LogUtil.d(mNativeId);
+    }
 
 		setContentView(R.layout.activity_note_reedit);
 		mTitleEditor = (EditText) findViewById(R.id.note_title);
@@ -227,7 +235,7 @@ public class NoteReEditActivity extends Activity implements View.OnClickListener
 				note.createTime = System.currentTimeMillis();
 				note.modifyTime = System.currentTimeMillis();
 				DatabaseAccessFactory.getInstance(NoteReEditActivity.this).noteAccessor().insert(note);
-
+        DatabaseAccessFactory.getInstance(NoteReEditActivity.this).noteAccessor().delete(mNativeId);
 				ToastUtils.show(R.string.note_saved);
 				// 跳转
 				Intent intent = new Intent(NoteReEditActivity.this, MainActivity.class);

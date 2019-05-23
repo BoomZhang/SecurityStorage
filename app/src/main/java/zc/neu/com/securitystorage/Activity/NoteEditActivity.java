@@ -1,23 +1,18 @@
 package zc.neu.com.securitystorage.Activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
 import android.util.TypedValue;
@@ -42,7 +37,6 @@ import java.util.List;
 import zc.neu.com.securitystorage.Bean.EditData;
 import zc.neu.com.securitystorage.Bean.Note;
 import zc.neu.com.securitystorage.R;
-import zc.neu.com.securitystorage.Util.FileUtil;
 import zc.neu.com.securitystorage.Util.FileUtils;
 import zc.neu.com.securitystorage.Util.ImageUtils;
 import zc.neu.com.securitystorage.Util.LongBlogContent;
@@ -53,6 +47,12 @@ import zc.neu.com.securitystorage.widget.RichEditor;
 import zc.neu.com.securitystorage.widget.handwriting.WritePadDialog;
 import zc.neu.com.securitystorage.widget.handwriting.listener.WriteDialogListener;
 
+/**
+ * 编辑Note页面
+ * 
+ * @author RenHui
+ * 
+ */
 @SuppressLint("SimpleDateFormat")
 public class NoteEditActivity extends BaseActivity {
 	private static final int LONG_BLOG_WIDTH = 440; // 长微博最佳宽度
@@ -73,7 +73,6 @@ public class NoteEditActivity extends BaseActivity {
 	private RichEditor mContentEditor;
 	private View mBtn1, mBtn2, mBtn3, mBtn4;
 	private OnClickListener mBtnListener;
-  private Uri uri;
 
 	private File mCurrentPhotoFile;// 照相机拍照得到的图片
 
@@ -232,9 +231,7 @@ public class NoteEditActivity extends BaseActivity {
 			PHOTO_DIR.mkdirs();// 创建照片的存储目录
 			mCurrentPhotoFile = new File(PHOTO_DIR, getPhotoFileName());// 给新照的照片文件命名
 			final Intent intent = getTakePickIntent(mCurrentPhotoFile);
-
 			startActivityForResult(intent, REQUEST_CODE_CAPTURE_CAMEIA);
-
 		} catch (ActivityNotFoundException e) {
 		}
 	}
@@ -258,45 +255,22 @@ public class NoteEditActivity extends BaseActivity {
 		if (resultCode != RESULT_OK) {
 			return;
 		}
+
 		if (requestCode == REQUEST_CODE_PICK_IMAGE) {
-		  uri = data.getData();
-      if (Build.VERSION.SDK_INT >= 23) {
-        if (ContextCompat.checkSelfPermission(NoteEditActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-          ActivityCompat.requestPermissions(NoteEditActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }else{
-          insertBitmap(FileUtils.getRealFilePath(this, uri));
-          return;
-        }
-      }
-		  insertBitmap(FileUtils.getRealFilePath(this, uri));
+			Uri uri = data.getData();
+			insertBitmap(FileUtils.getRealFilePath(this, uri));
 		} else if (requestCode == REQUEST_CODE_CAPTURE_CAMEIA) {
 			insertBitmap(mCurrentPhotoFile.getAbsolutePath());
 		}
 	}
 
-  @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    if(requestCode == 1){
-      if (grantResults.length > 0
-          && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        insertBitmap(FileUtils.getRealFilePath(this, uri));
-      }
-    }
-  }
-
-  /**
+	/**
 	 * 添加图片到富文本剪辑器
-	 * 在这里做一个路径转换的操作，将外部图片存到本应用包下
+	 * 
 	 * @param imagePath
 	 */
 	private void insertBitmap(String imagePath) {
-	  Bitmap bmp = BitmapFactory.decodeFile(imagePath);
-    try {
-      mContentEditor.insertImage(FileUtil.saveImage(bmp,getPhotoFileName()));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+		mContentEditor.insertImage(imagePath);
 	}
 
 	/** 转换编辑框内的所有内容为字符串 */
@@ -380,8 +354,7 @@ public class NoteEditActivity extends BaseActivity {
 					canvas.drawText(ss[i], x, y, paint);
 					y = y + 35;
 				}
-				//canvas.save(Canvas.ALL_SAVE_FLAG);
-        canvas.save();
+				canvas.save(Canvas.ALL_SAVE_FLAG);
 			} else if (itemData.imagePath != null) {
 				BitmapFactory.Options options = new BitmapFactory.Options();
 				options.inJustDecodeBounds = true;
@@ -391,8 +364,7 @@ public class NoteEditActivity extends BaseActivity {
 				Bitmap b = ImageLoader.getInstance().loadImageSync("file://" + itemData.imagePath,
 						new ImageSize(LONG_BLOG_WIDTH, (int) ((float) options.outHeight / ((float) options.outWidth / (float) LONG_BLOG_WIDTH))), opt);
 				canvas.drawBitmap(b, 0, y, null);
-				//canvas.save(Canvas.ALL_SAVE_FLAG);
-        canvas.save();
+				canvas.save(Canvas.ALL_SAVE_FLAG);
 				y += ((float) options.outHeight / ((float) options.outWidth / (float) LONG_BLOG_WIDTH)) + 35;
 			}
 		}

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import zc.neu.com.securitystorage.Activity.NoteDetailActivity;
 import zc.neu.com.securitystorage.Bean.Note;
 import zc.neu.com.securitystorage.R;
+import zc.neu.com.securitystorage.Util.LogUtil;
 import zc.neu.com.securitystorage.Util.TimeUtils;
 
 public class NoteAdapter extends BaseAdapter {
@@ -53,6 +54,7 @@ public class NoteAdapter extends BaseAdapter {
 		
 		NoteViewHolder holder = (NoteViewHolder) convertView.getTag();
 		holder.show(mNoteList.get(position));
+    LogUtil.d(TimeUtils.getTime(mNoteList.get(position).modifyTime));
 		return convertView;
 	}
 	
@@ -79,6 +81,7 @@ public class NoteAdapter extends BaseAdapter {
 					intent.putExtra("note_title", note.title);
 					//  TODO 还可以带其他参数
 					intent.putExtra("note_content", note.content);
+					intent.putExtra("note_id",note.nativeId);
 					mContext.startActivity(intent);
 				}
 			});
