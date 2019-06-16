@@ -45,7 +45,7 @@ public class ControlActvity extends AppCompatActivity implements
     boolean isFirstRun=sharedPreferences.getBoolean("isFirstRun", true);
     editor=sharedPreferences.edit();
     if(isFirstRun){
-      //Toast.makeText(MainActivity.this, "第一次运行", Toast.LENGTH_SHORT).show();
+      //跳转到设置密码的页面
       Intent intent = new Intent(ControlActvity.this,SetPasswordActivity.class);
       intent.putExtra("mode",0);
       startActivityForResult(intent,101);
@@ -73,10 +73,8 @@ public class ControlActvity extends AppCompatActivity implements
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if(requestCode == 101 && resultCode == RESULT_OK){
-
       editor.putBoolean("isFirstRun", false);
       editor.commit();
-
     }
 
   }

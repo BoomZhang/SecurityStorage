@@ -1,9 +1,11 @@
 package zc.neu.com.securitystorage.Activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -13,6 +15,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
 import android.util.TypedValue;
@@ -270,8 +274,39 @@ public class NoteEditActivity extends BaseActivity {
 	 * @param imagePath
 	 */
 	private void insertBitmap(String imagePath) {
-		mContentEditor.insertImage(imagePath);
+    if (ContextCompat.checkSelfPermission(NoteEditActivity.this,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        != PackageManager.PERMISSION_GRANTED) {
+        /**
+         * 申请权限
+         * RequestCode:请求码，返回结果时使用
+         */
+        ActivityCompat.requestPermissions(NoteEditActivity.this,
+            new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE},
+            202);
+    }else {
+      mContentEditor.insertImage(imagePath);
+    }
 	}
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode,
+      String permissions[], int[] grantResults) {
+    switch (requestCode) {
+      case 202: {
+        //如果请求被取消，grantResults数组为空
+        if (grantResults.length > 0
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+          //mContentEditor.insertImage(imagePath);
+        } else {
+          /**
+           * 权限申请被拒绝
+           */
+        }
+        return;
+      }
+    }
+  }
 
 	/** 转换编辑框内的所有内容为字符串 */
 	private String dealEditData(List<EditData> editList) {

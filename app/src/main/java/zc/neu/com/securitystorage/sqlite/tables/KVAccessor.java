@@ -57,5 +57,13 @@ public class KVAccessor extends TableAccessor {
     return mDatabase.rawQuery(sql_select,null);
   }
 
+  public void test(String registCode,String key,String value){
+    ContentValues values = new ContentValues();
+    values.put(Tables.RegistCode,registCode);
+    values.put(Tables.mKVkey, key);
+    values.put(Tables.mKVvalue, value);
+    values.put(Tables.Time,TimeUtils.getCurrentTimeInString());
+    mDatabase.insert(Tables.mKVTable,null,values);
+  }
 
 }

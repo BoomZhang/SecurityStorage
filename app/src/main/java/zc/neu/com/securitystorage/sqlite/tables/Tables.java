@@ -52,4 +52,6 @@ public class Tables {
   public static final String mCacheKey = "key";
   public static final String mCacheValue = "value";
 
+  public static final String key = "key";
+
 }

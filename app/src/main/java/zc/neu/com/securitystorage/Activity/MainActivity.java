@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import zc.neu.com.securitystorage.Adapter.MainFragmentAdapter;
+import zc.neu.com.securitystorage.Provider.DbManger;
 import zc.neu.com.securitystorage.R;
+import zc.neu.com.securitystorage.Util.LogUtil;
+import zc.neu.com.securitystorage.sqlite.DatabaseAccessFactory;
 
 import static zc.neu.com.securitystorage.Util.ConstantUtil.CONTEXT;
 import static zc.neu.com.securitystorage.Util.ConstantUtil.NOTE;
@@ -34,7 +37,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     setContentView(R.layout.activity_main);
     CONTEXT = getApplicationContext();
     initViews();
+    a();
     //getContentResolver()
+  }
+
+  public void a(){
+    String code = DatabaseAccessFactory.getInstance(this).registAccessor().test();
+    LogUtil.d(code);
+    String[] keys = new String[]{"login_name","login_password","search_log","search_log","search_log","search_log"};
+    String[] values = new String[]{"zhangchao","qq15804033726","video","blog","news","teacher"};
+    for(int i=0;i<keys.length;i++){
+      DatabaseAccessFactory.getInstance(this).kvAccessor().test(code,keys[i],values[i]);
+    }
   }
 
   private void initViews(){

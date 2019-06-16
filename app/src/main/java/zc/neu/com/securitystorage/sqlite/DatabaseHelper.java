@@ -18,6 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase database) {
+	  //创建需要的表
 		new SqliteV1().onCreate(database);
 		new SqliteKey().onCreate(database);
 		new SqliteRegist().onCreate(database);

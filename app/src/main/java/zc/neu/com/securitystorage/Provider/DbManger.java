@@ -34,7 +34,7 @@ public class DbManger {
   }
 
   /**
-   * 判断URI需要执行哪些操作
+   * 判断URI需要执行的操作
    * @param uri
    * @param values
    * @return

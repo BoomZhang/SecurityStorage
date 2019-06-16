@@ -14,7 +14,8 @@ public class SqliteRegist implements SqliteInterface {
           + Tables.mRegistId + " Integer PRIMARY KEY autoincrement,"
           + Tables.mRegistAppName + " TEXT NOT NULL,"
           + Tables.RegistCode+" TEXT NOT NULL,"
-          + Tables.Time + "TEXT NOT NULL" + ")";
+          + Tables.key +" TEXT NOT NULL,"
+          + Tables.Time + " TEXT NOT NULL" + ")";
 
   @Override
   public boolean onCreate(SQLiteDatabase database) {
